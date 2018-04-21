@@ -294,7 +294,7 @@
                 display: inline-block;
                 width: 16px;
                 height: 16px;
-                vertical-align: top;
+                vertica-align: top;
                 margin-right: 6px;
                 background-size: 16px 16px;
                 background-repeat: no-repeat;

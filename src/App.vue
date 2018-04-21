@@ -13,23 +13,33 @@
       </div>
     </div>
     <!--router-view将seller传递给goods组件，goods组件又将seller传递给shop-cart组件-->
-    <router-view :seller="seller" />
+    <keep-alive>
+       <router-view :seller="seller" />
+    </keep-alive>
   </div>
 </template>
 
 <script>
- import header from "./components/header/header"
+  import { urlParse } from './common/js/util'
+  import header from "./components/header/header"
 
 export default {
   name: 'App',
   data() {
     return {
-       seller: {}
+       seller: {
+         id: (() => {
+           let queryParam = urlParse();
+           return queryParam.id;
+         })()
+       }
     }
   },
   created() {
     this.$http.get('/api/seller').then((response) => {
-       this.seller = response.body;
+       // this.seller = response.body;
+       this.seller = Object.assign({}, this.seller, response.body);
+       // console.log(this.seller.id)
     })
   },
   components: {
